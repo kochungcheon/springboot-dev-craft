@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  kafka:
+    consumer:
+      group-id: health-check-tests
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      missing-topics-fatal: false
+  redis:
+
+testcontainers:
+  mysql:
+    image: "mysql:8.4.0"
+    database: "testdb"
+    username: "user"
+    password: "password"
+  redis:
+    image: "redis:7.2.5-alpine"
+    port: 6379
+  kafka:
+    image: "confluentinc/cp-kafka:7.5.1"
